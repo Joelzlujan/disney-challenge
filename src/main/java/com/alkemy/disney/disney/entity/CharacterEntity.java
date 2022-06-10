@@ -47,10 +47,7 @@ public class CharacterEntity {
     private String history;
 
 //RELATION BETWEEN CHARACTER -> MOVIES
-    @ManyToMany(mappedBy = "characters", fetch = FetchType.LAZY, cascade = {
-        CascadeType.MERGE,
-        CascadeType.PERSIST,
-        CascadeType.REFRESH})
+    @ManyToMany(mappedBy = "characters", fetch = FetchType.LAZY)
     private List<MovieEntity> movies = new ArrayList<>();
 
     private boolean deleted = Boolean.FALSE;

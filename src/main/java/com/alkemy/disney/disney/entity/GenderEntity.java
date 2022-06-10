@@ -35,13 +35,9 @@ public class GenderEntity implements Serializable{
     private String name;
     
     private String imagen;
-   //encontre info en los apuntes q enviaste sobre que no hacia falta declarar los cascade en las entidades "Hijas" o sea 
+   //encontre info en los apuntes q enviaste sobre que no hacia falta declarar los cascade en las entidades que no son dueñas de la relacion o sea 
    //solo declaro entonces en la entidad movie los cascade
-    @ManyToMany(mappedBy = "genders", fetch = FetchType.LAZY, 
-            cascade = {
-        CascadeType.MERGE,
-        CascadeType.PERSIST,
-        CascadeType.REFRESH})
+    @ManyToMany(mappedBy = "genders", fetch = FetchType.LAZY)
     private List <MovieEntity> movies = new ArrayList<>();
     
     private Boolean softDelete = Boolean.FALSE;
