@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -29,15 +30,15 @@ public class GenderEntity implements Serializable{
     @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name="uuid", strategy = "uuid2" )
-    private Long id;
+    private String id;
     
     private String name;
     
     private String imagen;
-    
+   //encontre info en los apuntes q enviaste sobre que no hacia falta declarar los cascade en las entidades "Hijas" o sea 
+   //solo declaro entonces en la entidad movie los cascade
     @ManyToMany(mappedBy = "genders", fetch = FetchType.LAZY, 
             cascade = {
-        CascadeType.DETACH,
         CascadeType.MERGE,
         CascadeType.PERSIST,
         CascadeType.REFRESH})
