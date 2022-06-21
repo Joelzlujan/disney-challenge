@@ -24,7 +24,7 @@ import org.hibernate.annotations.Where;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
+@AllArgsConstructor //Any annotations listed here are put on the generated constructor.
 @ToString
 @SQLDelete(sql = "UPDATE characters SET deleted = true WHERE id=?")
 @Where(clause = "deleted = false")
@@ -36,14 +36,19 @@ public class CharacterEntity {
     @Column(unique = true)
     private String id;
 
+    @Column(nullable = false)
     private String image;
 
+    @Column(length = 100, nullable = false)
     private String name;
 
+    @Column(nullable = false)
     private Integer age;
 
+    @Column(nullable = false)
     private Double weight;
 
+    @Column(length = 1000, nullable = false)
     private String history;
 
 //RELATION BETWEEN CHARACTER -> MOVIES
