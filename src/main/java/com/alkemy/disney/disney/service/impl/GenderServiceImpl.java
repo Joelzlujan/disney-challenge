@@ -2,6 +2,7 @@ package com.alkemy.disney.disney.service.impl;
 
 import com.alkemy.disney.disney.dto.GenderDTO;
 import com.alkemy.disney.disney.entity.GenderEntity;
+import com.alkemy.disney.disney.exceptions.DuplicateValueException;
 import com.alkemy.disney.disney.exceptions.NotFoundException;
 import com.alkemy.disney.disney.mapper.GenderMapper;
 import com.alkemy.disney.disney.repository.GenderRepository;
@@ -27,6 +28,41 @@ public class GenderServiceImpl implements GenderService{
         this.genderMapper = genderMapper;
         this.movieService = movieService;
     }
+
+    @Transactional
+    @Override
+    public GenderDTO save(GenderDTO genderDTO) {
+        validateGender(genderDTO,null);
+        GenderEntity entity = this.genderMapper.genderDTO2Entity(genderDTO);
+        GenderEntity entitySaved = this.genderRepository.save(entity);
+        GenderDTO result = this.genderMapper.genderEntity2DTO(entitySaved);
+
+        return result;
+    }
+    @Transactional
+    @Override
+    public GenderDTO update(String id, GenderDTO genderDTO) {
+        GenderEntity entity = this.getEntityById(id);
+        validateGender(genderDTO,entity);
+        if(this.genderRepository.existsById(id)) {
+            this.genderMapper.genderEntityRefreshValues(entity, genderDTO);
+            GenderEntity entitySaved = this.genderRepository.save(entity);
+            GenderDTO result = this.genderMapper.genderEntity2DTO(entitySaved);
+            return result;
+        }else{
+            throw new NotFoundException("The Gender to update with id "+id + "does not exist");
+        }
+    }
+    @Transactional
+    @Override
+    public void delete(String id) {
+        if(this.genderRepository.existsById(id)){
+            this.genderRepository.deleteById(id);
+        }else {
+            throw new NotFoundException("The gender to delete with id "+id+" does not exist");
+        }
+    }
+
     @Transactional(readOnly = true)
     @Override
     public List<GenderDTO> getAll() {
@@ -38,39 +74,14 @@ public class GenderServiceImpl implements GenderService{
     @Transactional(readOnly = true)
     @Override
     public GenderDTO getDetailsById(String id) {
-        GenderEntity entity = this.getEntityById(id);
-        GenderDTO dto = this.genderMapper.genderEntity2DTO(entity);
-        return dto;
-    }
-    @Transactional
-    @Override
-    public GenderDTO save(GenderDTO genderDTO) {
-        GenderEntity entity = this.genderMapper.genderDTO2Entity(genderDTO);
-        GenderEntity entitySaved = this.genderRepository.save(entity);
-        GenderDTO result = this.genderMapper.genderEntity2DTO(entitySaved);
-
-        return result;
-    }
-    @Transactional
-    @Override
-    public GenderDTO update(String id, GenderDTO genderDTO) {
-        GenderEntity entity = this.getEntityById(id);
-        this.genderMapper.genderEntityRefreshValues(entity,genderDTO);
-        GenderEntity entitySaved = this.genderRepository.save(entity);
-        GenderDTO result = this.genderMapper.genderEntity2DTO(entitySaved);
-        return result;
-    }
-    @Transactional
-    @Override
-    public void delete(String id) {
-        if(this.genderRepository.existsById(id)){
-            this.movieService.removeAllGender(id);
-            this.genderRepository.deleteById(id);
+        Optional<GenderEntity> entity = this.genderRepository.findById(id);
+        if(!entity.isPresent()){
+            throw new NotFoundException("The gender with id "+id+" wasn't found");
         }else {
-            throw new NotFoundException("The gender to delete with id "+id+" does not exist");
+            GenderDTO dto = this.genderMapper.genderEntity2DTO(entity.get());
+            return dto;
         }
     }
-
     @Transactional(readOnly = true)
     @Override
     public GenderEntity getEntityById(String id) {
@@ -87,7 +98,10 @@ public class GenderServiceImpl implements GenderService{
     }
 
     @Override
-    public void validate(GenderDTO genderDTO, GenderEntity genderEntity) {
+    public void validateGender(GenderDTO genderDTO, GenderEntity genderEntity) {
+        if(this.genderRepository.existsByName(genderDTO.getName()) && (genderEntity == null || !genderEntity.getName().equalsIgnoreCase(genderDTO.getName()))){
+            throw new DuplicateValueException("There is already a gender with the name '"+genderDTO.getName()+"'");
+        }
 
     }
 }

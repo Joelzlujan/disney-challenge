@@ -30,6 +30,7 @@ public class MovieDTO {
     @Max(value = 5, message = "The rating must not be greater than 5")
     private Float rating;
 
+    //ACA no es necesario enviar la lista de personajes..
     @Valid
     @NotNull(message="The Characters list must not be null")
     private List<CharacterDTO> characters;

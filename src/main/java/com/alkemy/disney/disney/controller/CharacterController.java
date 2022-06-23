@@ -56,12 +56,15 @@ public class CharacterController {
         this.movieService.addCharacter(idMovie,idCharacter);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
+    /* Este delete no es necesario como endpoint
     @DeleteMapping("/{idCharacter}/movie/{idMovie}")
     public ResponseEntity<Void> removeMovie(@PathVariable String idCharacter, @PathVariable String idMovie){
         this.movieService.removeCharacter(idMovie,idCharacter);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
-    @GetMapping("/filter")
+
+     */
+    @GetMapping//("/filter") no es necesario el filter en el api rest
     public ResponseEntity<List<CharacterDTO>> getDetailsByFilters(
             @RequestParam(required = false) String name,
             @RequestParam(required = false) Integer age,

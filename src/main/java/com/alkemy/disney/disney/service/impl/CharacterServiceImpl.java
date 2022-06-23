@@ -4,6 +4,7 @@ import com.alkemy.disney.disney.dto.CharacterBasicDTO;
 import com.alkemy.disney.disney.dto.CharacterDTO;
 import com.alkemy.disney.disney.dto.CharacterFiltersDTO;
 import com.alkemy.disney.disney.entity.CharacterEntity;
+import com.alkemy.disney.disney.exceptions.DuplicateValueException;
 import com.alkemy.disney.disney.exceptions.NotFoundException;
 import com.alkemy.disney.disney.mapper.CharacterMapper;
 import com.alkemy.disney.disney.repository.CharacterRepository;
@@ -41,6 +42,7 @@ public class CharacterServiceImpl implements CharacterService {
     @Transactional
     @Override
     public CharacterDTO save(CharacterDTO characterDTO) {
+        validateCharacter(characterDTO,null);
         CharacterEntity characterEntity = this.characterMapper.characterDTO2Entity(characterDTO);
         CharacterEntity entitySaved = this.characterRepository.save(characterEntity);
         CharacterDTO result = this.characterMapper.characterEntity2DTO(entitySaved,false);
@@ -50,10 +52,15 @@ public class CharacterServiceImpl implements CharacterService {
     @Override
     public CharacterDTO update(String id, CharacterDTO characterDTO) {
         CharacterEntity characterEntity = this.getEntityById(id);
-        this.characterMapper.characterEntityRefreshValues(characterEntity,characterDTO);
-        CharacterEntity entitySaved = this.characterRepository.save(characterEntity);
-        CharacterDTO result = this.characterMapper.characterEntity2DTO(entitySaved,false);
-        return result;
+        validateCharacter(characterDTO,characterEntity);
+        if(this.characterRepository.existsById(id)) {
+            this.characterMapper.characterEntityRefreshValues(characterEntity, characterDTO);
+            CharacterEntity entitySaved = this.characterRepository.save(characterEntity);
+            CharacterDTO result = this.characterMapper.characterEntity2DTO(entitySaved, false);
+            return result;
+        }else{
+            throw new NotFoundException("The Character to update with id "+id + "does not exist");
+        }
     }
     @Transactional
     @Override
@@ -75,9 +82,14 @@ public class CharacterServiceImpl implements CharacterService {
     @Transactional(readOnly = true)
     @Override
     public CharacterDTO getDetailsById(String id) {
-        CharacterEntity entity = this.getEntityById(id);
-        CharacterDTO dto = this.characterMapper.characterEntity2DTO(entity,true);
-        return dto;
+        Optional<CharacterEntity> entity = this.characterRepository.findById(id);
+        if(!entity.isPresent()){
+            throw new NotFoundException("The character with id '"+id+"' wasn't found");
+        }else {
+            CharacterDTO dto = this.characterMapper.characterEntity2DTO(entity.get(),true);
+            return dto;
+        }
+
     }
     @Transactional(readOnly = true)
     @Override
@@ -89,10 +101,6 @@ public class CharacterServiceImpl implements CharacterService {
         return entity.get();
     }
 
-    @Override
-    public void validate(CharacterDTO characterDTO, CharacterEntity characterEntity) {
-
-    }
     @Transactional(readOnly = true)
     @Override
     public Boolean existsByName(String name) {
@@ -105,6 +113,12 @@ public class CharacterServiceImpl implements CharacterService {
         List<CharacterEntity>entities = this.characterRepository.findAll(this.characterSpecification.getByFilters(filtersDTO));
         List<CharacterDTO>dtos = this.characterMapper.characterEntityList2DTOList(entities,true);
         return dtos;
+    }
+    @Override
+    public void validateCharacter(CharacterDTO characterDTO, CharacterEntity characterEntity) {
+        if(existsByName(characterDTO.getName()) && (characterEntity == null || !characterEntity.getName().equalsIgnoreCase(characterDTO.getName()))){
+            throw new DuplicateValueException("There is already a Character with the name '"+characterDTO.getName()+"'");
+        }
     }
 
 }

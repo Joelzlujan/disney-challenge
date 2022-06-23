@@ -20,5 +20,5 @@ public interface GenderService {
 
     public Boolean existById(String id);
 
-    public void validate(GenderDTO genderDTO, GenderEntity genderEntity);
+    public void validateGender(GenderDTO genderDTO, GenderEntity genderEntity);
 }

@@ -16,15 +16,13 @@ public interface MovieService {
 
     public void delete(String id);
 
-    public List<MovieBasicDTO> getAll();
+    public List<MovieBasicDTO> getAll(); //Get all lo uso para listar todas las pelis en el movie controller
 
     public MovieDTO getDetailsById(String id);
 
     public List<MovieDTO>getDetailsByFilters(String title, Set<String> idGenders, String order);
 
-    public void validate(MovieDTO movieDTO,MovieEntity movieEntity);
-
-    public void removeAllGender(String idGender);
+    public void validateMovie(MovieDTO movieDTO,MovieEntity movieEntity);
 
     public void addCharacter(String idMovie, String idCharacter);
 

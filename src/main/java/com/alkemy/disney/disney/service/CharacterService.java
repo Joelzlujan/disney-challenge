@@ -20,7 +20,7 @@ public interface CharacterService {
 
     public CharacterEntity getEntityById(String id);
 
-    public void validate (CharacterDTO characterDTO,CharacterEntity characterEntity);
+    public void validateCharacter (CharacterDTO characterDTO,CharacterEntity characterEntity);
 
     public Boolean existsByName(String name);
 

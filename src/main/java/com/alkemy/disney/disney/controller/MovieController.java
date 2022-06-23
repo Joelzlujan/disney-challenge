@@ -29,13 +29,13 @@ public class MovieController {
         MovieDTO result = this.movieService.getDetailsById(id);
         return ResponseEntity.status(HttpStatus.OK).body(result);
     }
-    @PostMapping
+    @PostMapping //ACA DEBERIA ACHICAR EL DTO
     public ResponseEntity<MovieDTO> save(@Valid @RequestBody MovieDTO movieDTO){
         MovieDTO result = this.movieService.save(movieDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(result);
     }
     @PutMapping("/{id}")
-    public ResponseEntity<MovieDTO> modify(@PathVariable String id, @Valid @RequestBody MovieDTO movieDTO){
+    public ResponseEntity<MovieDTO> modify(@PathVariable String id, @Valid @RequestBody MovieDTO movieDTO){ //sin el @Valid no sirven los @Null en los dto
         MovieDTO result = this.movieService.update(id,movieDTO);
         return ResponseEntity.status(HttpStatus.OK).body(result);
     }
@@ -54,7 +54,7 @@ public class MovieController {
         this.movieService.removeCharacter(idMovie,idCharacter);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
-    @GetMapping("/filter")
+    @GetMapping//("/filter") //no es necesario usar el filter, en este caso hay q devolver el Basic
     public ResponseEntity<List<MovieDTO>> getDetailsByFilters(
             @RequestParam(required = false) String name,
             @RequestParam(required = false) Set<String> genders,
