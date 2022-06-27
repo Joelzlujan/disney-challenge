@@ -14,15 +14,13 @@ public interface CharacterService {
 
     public void delete(String id);
 
-    public List<CharacterBasicDTO> getAll();
-
     public CharacterDTO getDetailsById(String id);
 
     public CharacterEntity getEntityById(String id);
 
-    public void validateCharacter (CharacterDTO characterDTO,CharacterEntity characterEntity);
+    //public void validateCharacter (CharacterDTO characterDTO,CharacterEntity characterEntity);
 
-    public Boolean existsByName(String name);
+    //public Boolean existsByTheName(String name);
 
     public List<CharacterDTO> getDetailsByFilters(String name, Integer age, Set<String> idMovies, String order);
 }

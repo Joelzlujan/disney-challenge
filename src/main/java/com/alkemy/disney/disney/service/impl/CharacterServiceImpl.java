@@ -13,12 +13,13 @@ import com.alkemy.disney.disney.repository.specification.CharacterSpecification;
 import com.alkemy.disney.disney.service.CharacterService;
 import com.alkemy.disney.disney.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
-
+@Service
 public class CharacterServiceImpl implements CharacterService {
 
     private CharacterRepository characterRepository;
@@ -42,7 +43,7 @@ public class CharacterServiceImpl implements CharacterService {
     @Transactional
     @Override
     public CharacterDTO save(CharacterDTO characterDTO) {
-        validateCharacter(characterDTO,null);
+       // validateCharacter(characterDTO,null);
         CharacterEntity characterEntity = this.characterMapper.characterDTO2Entity(characterDTO);
         CharacterEntity entitySaved = this.characterRepository.save(characterEntity);
         CharacterDTO result = this.characterMapper.characterEntity2DTO(entitySaved,false);
@@ -52,7 +53,7 @@ public class CharacterServiceImpl implements CharacterService {
     @Override
     public CharacterDTO update(String id, CharacterDTO characterDTO) {
         CharacterEntity characterEntity = this.getEntityById(id);
-        validateCharacter(characterDTO,characterEntity);
+        //validateCharacter(characterDTO,characterEntity);
         if(this.characterRepository.existsById(id)) {
             this.characterMapper.characterEntityRefreshValues(characterEntity, characterDTO);
             CharacterEntity entitySaved = this.characterRepository.save(characterEntity);
@@ -71,14 +72,7 @@ public class CharacterServiceImpl implements CharacterService {
             throw new NotFoundException("The character to delete with id "+id+" does not exist");
         }
     }
-    @Transactional
-    @Override
-    public List<CharacterBasicDTO> getAll() {
-        List<CharacterEntity> characterEntities = this.characterRepository.findAll();
-        List<CharacterBasicDTO>characterDTOS = this.characterMapper.characterBasicEntityList2BasicDTOList(characterEntities);
 
-        return characterDTOS;
-    }
     @Transactional(readOnly = true)
     @Override
     public CharacterDTO getDetailsById(String id) {
@@ -100,12 +94,14 @@ public class CharacterServiceImpl implements CharacterService {
         }
         return entity.get();
     }
-
+/*
     @Transactional(readOnly = true)
     @Override
-    public Boolean existsByName(String name) {
-        return this.characterRepository.existByName(name);
+    public Boolean existsByTheName(String name) {
+        return this.characterRepository.existByTheName(name);
     }
+*/
+
     @Transactional
     @Override
     public List<CharacterDTO> getDetailsByFilters(String name, Integer age, Set<String> idMovies, String order) {
@@ -114,11 +110,12 @@ public class CharacterServiceImpl implements CharacterService {
         List<CharacterDTO>dtos = this.characterMapper.characterEntityList2DTOList(entities,true);
         return dtos;
     }
+/*
     @Override
     public void validateCharacter(CharacterDTO characterDTO, CharacterEntity characterEntity) {
-        if(existsByName(characterDTO.getName()) && (characterEntity == null || !characterEntity.getName().equalsIgnoreCase(characterDTO.getName()))){
+        if(this.characterRepository.existByTheName(characterDTO.getName()) && (characterEntity == null || !characterEntity.getName().equalsIgnoreCase(characterDTO.getName()))){
             throw new DuplicateValueException("There is already a Character with the name '"+characterDTO.getName()+"'");
         }
     }
-
+*/
 }

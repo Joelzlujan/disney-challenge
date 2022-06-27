@@ -19,11 +19,7 @@ public class MovieController {
     @Autowired
     private MovieService movieService;
 
-    @GetMapping
-    public ResponseEntity<List<MovieBasicDTO>>getAll (){
-        List<MovieBasicDTO> movies = this.movieService.getAll();
-        return ResponseEntity.status(HttpStatus.OK).body(movies);
-    }
+
     @GetMapping("/{id}")
     public ResponseEntity<MovieDTO> getDetailsById(@PathVariable String id){
         MovieDTO result = this.movieService.getDetailsById(id);
@@ -54,7 +50,7 @@ public class MovieController {
         this.movieService.removeCharacter(idMovie,idCharacter);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
-    @GetMapping//("/filter") //no es necesario usar el filter, en este caso hay q devolver el Basic
+    @GetMapping //no es necesario usar el filter, ya que saque el getAll
     public ResponseEntity<List<MovieDTO>> getDetailsByFilters(
             @RequestParam(required = false) String name,
             @RequestParam(required = false) Set<String> genders,

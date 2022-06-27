@@ -36,5 +36,6 @@ public class CharacterDTO {
     @NotNull(message = "The story must not be null")
     @Size(max = 1000, message = "The story must be no longer than 1000 characters")
     private String history;
+
     private List<MovieDTO> movies;
 }

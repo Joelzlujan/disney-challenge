@@ -78,7 +78,7 @@ public class MovieEntity implements Serializable {
     //recordar que el fetch en ManyToOne se inicializa en eager. asi q no es necesario declararlo.
     //es unidireccional
     @ManyToOne()
-    @JoinColumn(name = "gender_id") // referencedColumnName = con este haria la relacion en la tabla
+    @JoinColumn(name = "gender_id", insertable = false, updatable = false) // referencedColumnName = con este haria la relacion en la tabla
     private GenderEntity gender;
 
     @Column(name = "gender_id")

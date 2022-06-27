@@ -1,5 +1,6 @@
 package com.alkemy.disney.disney.entity;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -28,7 +29,7 @@ import org.hibernate.annotations.Where;
 @ToString
 @SQLDelete(sql = "UPDATE characters SET deleted = true WHERE id=?")
 @Where(clause = "deleted = false")
-public class CharacterEntity {
+public class CharacterEntity implements Serializable {
 
     @Id
     @GeneratedValue(generator = "uuid")

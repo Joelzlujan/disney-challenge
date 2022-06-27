@@ -81,17 +81,9 @@ public class MovieServiceImpl implements MovieService {
 
     @Transactional
     @Override
-    public List<MovieBasicDTO> getAll() {
-        List<MovieEntity>movieEntities = movieRepository.findAll();
-        List<MovieBasicDTO>movieBasicDTOS = movieMapper.movieEntityBasicList2DTOBasicList(movieEntities);
-        return movieBasicDTOS;
-    }
-
-    @Transactional
-    @Override
     public MovieEntity getEntityById(String id) {
         Optional<MovieEntity> entity = this.movieRepository.findById(id);
-        if(!entity.isEmpty()){
+        if(!entity.isPresent()){
             throw new ParamNotFoundException("The Movie with id "+id+" wasn't found");
         }
         return entity.get();
