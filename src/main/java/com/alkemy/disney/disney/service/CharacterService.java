@@ -18,9 +18,7 @@ public interface CharacterService {
 
     public CharacterEntity getEntityById(String id);
 
-    //public void validateCharacter (CharacterDTO characterDTO,CharacterEntity characterEntity);
-
-    //public Boolean existsByTheName(String name);
+    public void validateCharacter (CharacterDTO characterDTO,CharacterEntity characterEntity);
 
     public List<CharacterDTO> getDetailsByFilters(String name, Integer age, Set<String> idMovies, String order);
 }

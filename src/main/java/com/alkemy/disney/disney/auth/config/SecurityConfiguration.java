@@ -4,13 +4,14 @@ import com.alkemy.disney.disney.auth.filter.JwtRequestFilter;
 import com.alkemy.disney.disney.auth.service.UserDetailsCustomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
@@ -20,8 +21,10 @@ import java.net.PasswordAuthentication;
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter { //Ojo y cuidado con la version de java, y spring boot starter
 
+    @Lazy
     @Autowired
     private UserDetailsCustomService userDetailsCustomService;
+    @Lazy
     @Autowired
     private JwtRequestFilter jwtRequestFilter;
 
@@ -31,7 +34,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter { //Ojo 
     }
     @Bean//genera un componente en spring
     public PasswordEncoder passwordEncoder(){
-        return NoOpPasswordEncoder.getInstance();  //aca le decimos que no codifique la password q ingresemos.
+        return new BCryptPasswordEncoder();  //aca le decimos que  codifique la password q ingresemos.
     }
     @Override
     @Bean

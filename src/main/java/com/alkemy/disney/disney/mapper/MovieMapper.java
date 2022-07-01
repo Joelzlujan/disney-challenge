@@ -17,9 +17,12 @@ import java.util.List;
 
 @Component
 public class MovieMapper {
+
     private CharacterMapper characterMapper;
+
     private GenderMapper genderMapper;
 
+    @Autowired
     public MovieMapper(@Lazy CharacterMapper characterMapper, GenderMapper genderMapper) {
         this.characterMapper = characterMapper;
         this.genderMapper = genderMapper;

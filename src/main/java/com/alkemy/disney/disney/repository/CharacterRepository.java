@@ -10,7 +10,7 @@ import java.util.List;
 public interface CharacterRepository extends JpaRepository<CharacterEntity,String >, JpaSpecificationExecutor<CharacterEntity> {
     CharacterEntity findByName(String name);
 
-    //Boolean existByName(String name);
+    Boolean existsByName(String name);
     @Override
     List<CharacterEntity>findAll(Specification <CharacterEntity> spec);//hay q hacer q haga el override del findAll
 }

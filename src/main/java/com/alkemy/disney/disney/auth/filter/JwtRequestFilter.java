@@ -25,7 +25,6 @@ public class JwtRequestFilter extends OncePerRequestFilter {
     @Autowired
     private JwtUtils jwtUtils;
 
-    @Lazy
     @Autowired
     private AuthenticationManager authenticationManager;
 
@@ -43,10 +42,10 @@ public class JwtRequestFilter extends OncePerRequestFilter {
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
             UserDetails userDetails = this.userDetailsCustomService.loadUserByUsername(username);
             if (jwtUtils.validateToken(jwt, userDetails)) {
-                UsernamePasswordAuthenticationToken authRequ = new UsernamePasswordAuthenticationToken(userDetails.getUsername(), userDetails.getPassword());
-                Authentication auth = authenticationManager.authenticate(authRequ);
+                UsernamePasswordAuthenticationToken authRequ = new UsernamePasswordAuthenticationToken(userDetails,null,null);
+                //Authentication auth = authenticationManager.authenticate(authRequ); //este es innecesario, es redundante
                 //See auth in context
-                SecurityContextHolder.getContext().setAuthentication(auth);
+                SecurityContextHolder.getContext().setAuthentication(authRequ);
             }
         }
         chain.doFilter(request, response);

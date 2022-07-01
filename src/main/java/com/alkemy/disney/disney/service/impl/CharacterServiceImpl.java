@@ -43,7 +43,7 @@ public class CharacterServiceImpl implements CharacterService {
     @Transactional
     @Override
     public CharacterDTO save(CharacterDTO characterDTO) {
-       // validateCharacter(characterDTO,null);
+        validateCharacter(characterDTO,null);
         CharacterEntity characterEntity = this.characterMapper.characterDTO2Entity(characterDTO);
         CharacterEntity entitySaved = this.characterRepository.save(characterEntity);
         CharacterDTO result = this.characterMapper.characterEntity2DTO(entitySaved,false);
@@ -53,7 +53,7 @@ public class CharacterServiceImpl implements CharacterService {
     @Override
     public CharacterDTO update(String id, CharacterDTO characterDTO) {
         CharacterEntity characterEntity = this.getEntityById(id);
-        //validateCharacter(characterDTO,characterEntity);
+        validateCharacter(characterDTO,characterEntity);
         if(this.characterRepository.existsById(id)) {
             this.characterMapper.characterEntityRefreshValues(characterEntity, characterDTO);
             CharacterEntity entitySaved = this.characterRepository.save(characterEntity);
@@ -94,13 +94,6 @@ public class CharacterServiceImpl implements CharacterService {
         }
         return entity.get();
     }
-/*
-    @Transactional(readOnly = true)
-    @Override
-    public Boolean existsByTheName(String name) {
-        return this.characterRepository.existByTheName(name);
-    }
-*/
 
     @Transactional
     @Override
@@ -110,12 +103,12 @@ public class CharacterServiceImpl implements CharacterService {
         List<CharacterDTO>dtos = this.characterMapper.characterEntityList2DTOList(entities,true);
         return dtos;
     }
-/*
+
     @Override
     public void validateCharacter(CharacterDTO characterDTO, CharacterEntity characterEntity) {
-        if(this.characterRepository.existByTheName(characterDTO.getName()) && (characterEntity == null || !characterEntity.getName().equalsIgnoreCase(characterDTO.getName()))){
+        if(this.characterRepository.existsByName(characterDTO.getName()) && (characterEntity == null || !characterEntity.getName().equalsIgnoreCase(characterDTO.getName()))){
             throw new DuplicateValueException("There is already a Character with the name '"+characterDTO.getName()+"'");
         }
     }
-*/
+
 }

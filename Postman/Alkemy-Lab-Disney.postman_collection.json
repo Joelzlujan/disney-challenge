@@ -1,0 +1,555 @@
+{
+	"info": {
+		"_postman_id": "81a88753-2ebd-41e1-97b7-eb06f79398bd",
+		"name": "Alkemy-Lab-Disney",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20835577"
+	},
+	"item": [
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "singin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\":\"joelandreslujan@gmail.com\",\r\n    \"password\":\"password1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/auth/singin",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"singin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "singup",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\":\"joelandreslujan@gmail.com\",\r\n    \"password\":\"password1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/auth/singup",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"singup"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Gender",
+			"item": [
+				{
+					"name": "Gender",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb2VsYW5kcmVzbHVqYW5AZ21haWwuY29tIiwiZXhwIjoxNjU2NzIyNjM1LCJpYXQiOjE2NTY2ODY2MzV9.RCFehAS3JJC_U2ArZQpYHQEZ2ulow37JsIX5h4p2lkk",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": " {   \r\n    \"image\":\"/src/main/resources/static/img/genre-Terror.jpg\",\r\n    \"name\":\"Terror\"\r\n }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/genres",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"genres"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb2VsYW5kcmVzbHVqYW5AZ21haWwuY29tIiwiZXhwIjoxNjU2NzIyNjM1LCJpYXQiOjE2NTY2ODY2MzV9.RCFehAS3JJC_U2ArZQpYHQEZ2ulow37JsIX5h4p2lkk",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/genres",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"genres"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Gender",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb2VsYW5kcmVzbHVqYW5AZ21haWwuY29tIiwiZXhwIjoxNjU2NzE4NTMyLCJpYXQiOjE2NTY2ODI1MzJ9.kpre6a_UAy0vuTaq00dEGBUOp0VE1DyDJFgyXhmJP50",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8080/genres/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"genres",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "0dc3c35e-0a75-4bb6-972a-a3a8871ec7f6"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb2VsYW5kcmVzbHVqYW5AZ21haWwuY29tIiwiZXhwIjoxNjU2NzIyNjM1LCJpYXQiOjE2NTY2ODY2MzV9.RCFehAS3JJC_U2ArZQpYHQEZ2ulow37JsIX5h4p2lkk",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": " {   \r\n    \"image\":\"/src/main/resources/static/img/genre-Terror256.jpg\",\r\n    \"name\":\"Terror\"\r\n }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/genres/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"genres",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "aa491f7a-6b2c-45fc-a46c-537243285025"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Movies",
+			"item": [
+				{
+					"name": "movies",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/icons",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"icons"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Movie",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb2VsYW5kcmVzbHVqYW5AZ21haWwuY29tIiwiZXhwIjoxNjU2NDYzNDIyLCJpYXQiOjE2NTY0Mjc0MjJ9.Ytr7nlR-jr0FJMHoDeM1tAe8-yLwu2pOmNvCALqfNG0",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"image\": \"/src/main/resources/static/img/movie-HighSchoolMusical.jpg\",\r\n    \"title\": \"Hich School Musical\",\r\n    \"creationDate\": \"2006-01-20\",\r\n    \"characters\": [],\r\n    \"Rating\":null,\r\n    \"genderId\": \"e80339e2-d5a2-4d56-9540-c7541a1c9b10\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/movies",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"movies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Character to Movie",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb2VsYW5kcmVzbHVqYW5AZ21haWwuY29tIiwiZXhwIjoxNjU2NDk5MDc1LCJpYXQiOjE2NTY0NjMwNzV9.91M3oQrGqVz84OZJMNbwblqemPN-e1KTLvKSqK89nIY",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/movies/:idMovie/character/:idCharacter",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"movies",
+								":idMovie",
+								"character",
+								":idCharacter"
+							],
+							"variable": [
+								{
+									"key": "idMovie",
+									"value": "55857dfa-6ba8-48ea-9205-3c2c84fab64a"
+								},
+								{
+									"key": "idCharacter",
+									"value": "73b135a2-ee92-407c-9df4-7c9caac9a3db"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove Character To movie",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer ",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/movies/:idMovie/character/:idCharacter",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"movies",
+								":idMovie",
+								"character",
+								":idCharacter"
+							],
+							"variable": [
+								{
+									"key": "idMovie",
+									"value": "55857dfa-6ba8-48ea-9205-3c2c84fab64a"
+								},
+								{
+									"key": "idCharacter",
+									"value": "73b135a2-ee92-407c-9df4-7c9caac9a3db"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Movie",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/movies/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"movies",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Movies",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb2VsYW5kcmVzbHVqYW5AZ21haWwuY29tIiwiZXhwIjoxNjU2NzIyNjM1LCJpYXQiOjE2NTY2ODY2MzV9.RCFehAS3JJC_U2ArZQpYHQEZ2ulow37JsIX5h4p2lkk",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/movies/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"movies",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Character",
+			"item": [
+				{
+					"name": "Character",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb2VsYW5kcmVzbHVqYW5AZ21haWwuY29tIiwiZXhwIjoxNjU2Njc2Mjk0LCJpYXQiOjE2NTY2NDAyOTR9._j_F_0ed_O004Xw9NeSd_WmsJxUMWd8AHyMMQkdpZa8",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"image\": \"/src/main/resources/static/img/character-Woody.png\",\r\n    \"name\": \"Woody\",\r\n    \"age\": 25,\r\n    \"weight\": 1,\r\n    \"history\": \"Sheriff Woody is a fictional pullstring cowboy rag doll who appears in the Disney/Pixar Toy Story franchise. In the movies, Woody is one of the main protagonist characters along with Buzz Lightyear.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/characters",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"characters"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all Character",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer  eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb2VsYW5kcmVzbHVqYW5AZ21haWwuY29tIiwiZXhwIjoxNjU2Njc2Mjk0LCJpYXQiOjE2NTY2NDAyOTR9._j_F_0ed_O004Xw9NeSd_WmsJxUMWd8AHyMMQkdpZa8",
+								"type": "text"
+							}
+						]
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Character",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb2VsYW5kcmVzbHVqYW5AZ21haWwuY29tIiwiZXhwIjoxNjU2NzIwMTE1LCJpYXQiOjE2NTY2ODQxMTV9.slRmF97-u5PQnkhtYNWW0W1WmG_8t7IyT1BTswHj93w",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/characters/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"characters",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Character",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb2VsYW5kcmVzbHVqYW5AZ21haWwuY29tIiwiZXhwIjoxNjU2NzIyNjM1LCJpYXQiOjE2NTY2ODY2MzV9.RCFehAS3JJC_U2ArZQpYHQEZ2ulow37JsIX5h4p2lkk",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/characters/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"characters",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get One",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb2VsYW5kcmVzbHVqYW5AZ21haWwuY29tIiwiZXhwIjoxNjU2NzIyNjM1LCJpYXQiOjE2NTY2ODY2MzV9.RCFehAS3JJC_U2ArZQpYHQEZ2ulow37JsIX5h4p2lkk",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/characters/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"characters",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

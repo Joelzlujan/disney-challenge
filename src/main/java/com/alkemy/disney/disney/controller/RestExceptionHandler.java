@@ -4,6 +4,7 @@ import com.alkemy.disney.disney.dto.ApiErrorDTO;
 import com.alkemy.disney.disney.exceptions.DuplicateValueException;
 import com.alkemy.disney.disney.exceptions.NotFoundException;
 import com.alkemy.disney.disney.exceptions.ParamNotFoundException;
+import com.alkemy.disney.disney.exceptions.UserAlreadyExistAuthenticationException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -70,10 +71,14 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
                 Arrays.asList("Duplicated Value"));
         return handleExceptionInternal(ex, errorDTO, new HttpHeaders(),HttpStatus.CONFLICT,request);
     }
+    @ExceptionHandler(value={UserAlreadyExistAuthenticationException.class})
+    protected ResponseEntity<Object> handleUserAlreadyExistException(RuntimeException ex, WebRequest request){
+        ApiErrorDTO errorDTO = new ApiErrorDTO(
+                HttpStatus.CONFLICT,
+                ex.getMessage(),
+                Arrays.asList("User already Exist"));
+        return handleExceptionInternal(ex, errorDTO, new HttpHeaders(),HttpStatus.CONFLICT,request);
 
-
-
-
-
+    }
 
 }

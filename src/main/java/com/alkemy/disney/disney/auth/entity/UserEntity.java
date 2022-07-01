@@ -18,7 +18,7 @@ public class UserEntity implements UserDetails {
     @Column(unique = true, nullable = false)
     private String username;
 
-    @Column(nullable = false, length = 16)
+    @Column(nullable = false)
     private String password;
 
     private boolean accountNonExpired;
@@ -99,4 +99,6 @@ public class UserEntity implements UserDetails {
     public boolean isEnabled() {
         return this.enabled;
     }
+
+
 }

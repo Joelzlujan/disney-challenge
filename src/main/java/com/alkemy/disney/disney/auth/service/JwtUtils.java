@@ -52,5 +52,6 @@ public class JwtUtils {
     public Boolean validateToken(String token, UserDetails userDetails) {
         final String username = extractUsername(token);
         return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
+        //return !isTokenExpired(token);  Asi deberia ser, y en parametro deberia estar el token nomas
     }
 }
