@@ -217,16 +217,28 @@
 					"name": "movies",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb2VsYW5kcmVzbHVqYW5AZ21haWwuY29tIiwiZXhwIjoxNjU2NzE4NTMyLCJpYXQiOjE2NTY2ODI1MzJ9.kpre6a_UAy0vuTaq00dEGBUOp0VE1DyDJFgyXhmJP50",
+								"type": "text"
+							}
+						],
 						"url": {
-							"raw": "http://localhost:8080/icons",
+							"raw": "http://localhost:8080/movies?order=ASC",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"icons"
+								"movies"
+							],
+							"query": [
+								{
+									"key": "order",
+									"value": "ASC"
+								}
 							]
 						}
 					},
@@ -441,15 +453,39 @@
 				},
 				{
 					"name": "Get all Character",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
 						"method": "GET",
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer  eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb2VsYW5kcmVzbHVqYW5AZ21haWwuY29tIiwiZXhwIjoxNjU2Njc2Mjk0LCJpYXQiOjE2NTY2NDAyOTR9._j_F_0ed_O004Xw9NeSd_WmsJxUMWd8AHyMMQkdpZa8",
+								"value": "Bearer  eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb2VsYW5kcmVzbHVqYW5AZ21haWwuY29tIiwiZXhwIjoxNjU2NzIwMTE1LCJpYXQiOjE2NTY2ODQxMTV9.slRmF97-u5PQnkhtYNWW0W1WmG_8t7IyT1BTswHj93w",
 								"type": "text"
 							}
-						]
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8080/characters?age=30",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"characters"
+							],
+							"query": [
+								{
+									"key": "age",
+									"value": "30"
+								}
+							]
+						}
 					},
 					"response": []
 				},
